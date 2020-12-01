@@ -204,7 +204,7 @@ inputs = %w[
 expenses = inputs.map(&:to_i).sort
 
 def answer(expenses, permutation_length)
-  expenses.permutation(permutation_length).detect do |suspects|
+  expenses.combination(permutation_length).detect do |suspects|
     suspects.sum == 2020
   end.inject(:*)
 end
