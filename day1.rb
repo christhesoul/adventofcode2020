@@ -201,16 +201,13 @@ inputs = %w[
 1535
 ]
 # Convert to integers
-ints = inputs.map(&:to_i).sort
+expenses = inputs.map(&:to_i).sort
 
-def answer(ints, permutation_length)
-  ints.permutation(permutation_length).detect do |suspects|
+def answer(expenses, permutation_length)
+  expenses.permutation(permutation_length).detect do |suspects|
     suspects.sum == 2020
   end.inject(:*)
 end
 
-# part 1
-puts "Part 1 answer: #{answer(ints, 2)}"
-
-# part 2
-puts "Part 1 answer: #{answer(ints, 3)}"
+puts "Part 1 answer: #{answer(expenses, 2)}"
+puts "Part 2 answer: #{answer(expenses, 3)}"
