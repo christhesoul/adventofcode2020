@@ -5,10 +5,6 @@ class Passport
     @data = hashify(data)
   end
 
-  def to_s
-    @data.flatten.join(' ')
-  end
-
   def valid?
     @data.all? do |k, v|
       send("validate_#{k}", v)
@@ -63,11 +59,4 @@ passports = File.read('input.txt').split("\n\n").map do |data|
   Passport.new(data)
 end
 
-puts passports.count
 puts passports.select(&:valid?).count
-
-passports.each do |passport|
-  if passport.valid?
-    puts passport
-  end
-end
