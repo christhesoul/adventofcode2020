@@ -1,11 +1,30 @@
 class Passport
   attr_reader :data
 
+  FIELDS = {
+    'byr' => 'Birth Year',
+    'iyr' => 'Issue Year',
+    'eyr' => 'Expiration Year',
+    'hgt' => 'Height',
+    'hcl' => 'Hair Color',
+    'ecl' => 'Eye Color',
+    'pid' => 'Passport ID',
+    'cid' => 'Country ID'
+  }.freeze
+
   def initialize(data)
     @data = hashify(data)
   end
 
   def valid?
+    present_values? && valid_values?
+  end
+
+  def present_values?
+    ((FIELDS.keys - @data.keys) - ['cid']).empty?
+  end
+
+  def valid_values?
     @data.all? do |k, v|
       send("validate_#{k}", v)
     end
